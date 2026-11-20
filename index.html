@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#050506" />
+    <title>Swarm — Built by Particles</title>
+    <meta name="description" content="An interactive study in emergence: a website assembled, particle by particle, as you scroll." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/src/style.css" />
+    <script>
+      // Decide the rendering mode before first paint: static fallback unless WebGL is usable.
+      (function () {
+        var ok = false;
+        try {
+          var c = document.createElement("canvas");
+          ok = !!(window.WebGLRenderingContext && (c.getContext("webgl2") || c.getContext("webgl")));
+        } catch (e) {}
+        document.documentElement.classList.add(ok ? "has-webgl" : "no-webgl");
+      })();
+    </script>
+  </head>
+  <body>
+    <canvas id="swarm" aria-hidden="true"></canvas>
+    <div class="atmos" aria-hidden="true"></div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+
+    <!-- Persistent HUD -->
+    <header class="hud">
+      <a class="hud__brand" href="#top" data-scroll-top>Swarm<span>/</span>Nº&nbsp;24</a>
+      <nav class="hud__index" aria-label="Chapters">
+        <ol>
+          <li data-chapter="0"><a href="#ch-0">01</a></li>
+          <li data-chapter="1"><a href="#ch-1">02</a></li>
+          <li data-chapter="2"><a href="#ch-2">03</a></li>
+          <li data-chapter="3"><a href="#ch-3">04</a></li>
+          <li data-chapter="4"><a href="#ch-4">05</a></li>
+          <li data-chapter="5"><a href="#ch-5">06</a></li>
+        </ol>
+      </nav>
+      <p class="hud__stats mono"><span data-count>—</span> particles · <span data-fps>—</span> fps</p>
+    </header>
+    <p class="hud__coords mono" aria-hidden="true">x <span data-cx>0000</span> · y <span data-cy>0000</span></p>
+    <div class="hud__progress" aria-hidden="true"><span></span></div>
+
+    <!-- The stage: fixed layers whose geometry the particles sample -->
+    <main id="stage">
+      <!-- 01 · Introduction -->
+      <section class="layer layer--hero" id="ch-0" data-layer="hero">
+        <p class="eyebrow mono reveal-line"><span>An interactive study in emergence</span></p>
+        <h1 class="hero__title" data-swarm="text">Swarm</h1>
+        <div class="hero__foot">
+          <p class="serif reveal-line"><span>Thousands of particles, one intention:</span></p>
+          <p class="serif reveal-line"><span><em>to build what you are about to see.</em></span></p>
+        </div>
+        <p class="hero__scroll mono"><span>Scroll to disperse</span><i></i></p>
+      </section>
+
+      <!-- 02 · Dispersal -->
+      <section class="layer layer--chapter layer--left" id="ch-1" data-layer="cloud">
+        <p class="kicker mono reveal-line"><span>02 — Disperse</span></p>
+        <h2 class="display reveal-line"><span>Every structure</span></h2>
+        <h2 class="display reveal-line"><span><em>begins as noise.</em></span></h2>
+        <p class="body reveal-line"><span>Thousands of points, no blueprint. Only local rules: follow, avoid, align.</span></p>
+      </section>
+
+      <!-- 03 · Formation -->
+      <section class="layer layer--chapter layer--right" id="ch-2" data-layer="form">
+        <p class="kicker mono reveal-line"><span>03 — Formation</span></p>
+        <h2 class="display reveal-line"><span>Order, found</span></h2>
+        <h2 class="display reveal-line"><span><em>in motion.</em></span></h2>
+        <p class="body reveal-line"><span>Move your cursor. The structure leans toward you — geodesic, weightless, listening.</span></p>
+      </section>
+
+      <!-- 04 · Fracture -->
+      <section class="layer layer--chapter layer--center" id="ch-3" data-layer="fracture">
+        <p class="kicker mono reveal-line"><span>04 — Fracture</span></p>
+        <h2 class="display reveal-line"><span>Break it apart.</span></h2>
+        <h2 class="display reveal-line"><span><em>Keep the pieces.</em></span></h2>
+      </section>
+
+      <!-- 05 · Website construction. Every [data-swarm] node is assembled by particles first. -->
+      <section class="layer layer--site" id="ch-4" data-layer="site">
+        <div class="site">
+          <div class="site__frame" data-swarm="box" data-weight="0.9"></div>
+          <nav class="site__nav">
+            <span class="site__logo" data-swarm="text">◐ Halcyon</span>
+            <ul>
+              <li data-swarm="text">Work</li>
+              <li data-swarm="text">Studio</li>
+              <li data-swarm="text">Journal</li>
+              <li class="site__pill" data-swarm="box"><span>Contact</span></li>
+            </ul>
+          </nav>
+          <div class="site__hero">
+            <div class="site__copy">
+              <p class="site__tag mono" data-swarm="text">Interfaces, assembled</p>
+              <h3 class="site__title" data-swarm="text">Design that holds together.</h3>
+              <p class="site__lede" data-swarm="text">A studio for digital products that feel inevitable.</p>
+              <a class="site__btn" href="#ch-4" data-swarm="box" data-fill="0.3" tabindex="-1"><span>View case studies →</span></a>
+            </div>
+            <figure class="site__image" data-swarm="image" data-weight="0.6">
+              <div class="site__art"></div>
+              <figcaption class="mono">fig. 01 — Halo, 2026</figcaption>
+            </figure>
+          </div>
+          <div class="site__cards">
+            <article class="card" data-swarm="box">
+              <span class="card__n mono">01</span>
+              <h4 data-swarm="text">Strategy</h4>
+              <p>Positioning, naming and product direction.</p>
+            </article>
+            <article class="card" data-swarm="box">
+              <span class="card__n mono">02</span>
+              <h4 data-swarm="text">Interface</h4>
+              <p>Systems that scale from pixel to platform.</p>
+            </article>
+            <article class="card" data-swarm="box">
+              <span class="card__n mono">03</span>
+              <h4 data-swarm="text">Motion</h4>
+              <p>Behaviour designed, never decorated.</p>
+            </article>
+          </div>
+        </div>
+        <p class="site__caption kicker mono"><span>05 — Construction · every element above was assembled by the swarm</span></p>
+      </section>
+
+      <!-- 06 · Final transformation -->
+      <section class="layer layer--final" id="ch-5" data-layer="final">
+        <p class="kicker mono reveal-line"><span>06 — Convergence</span></p>
+        <h2 class="final__title" data-swarm="text">Build what<br />moves.</h2>
+        <div class="final__actions">
+          <a class="final__cta" href="mailto:hello@example.com" data-swarm="box"><span>Start a project</span><i>→</i></a>
+          <a class="final__replay mono" href="#top" data-scroll-top>↺ Replay the swarm</a>
+        </div>
+        <footer class="final__foot mono">
+          <span>Swarm Nº 24 — Three.js · GSAP · WebGL</span>
+          <span>© 2026</span>
+        </footer>
+      </section>
+    </main>
+
+    <!-- Scroll track: its length is the timeline -->
+    <div id="track" aria-hidden="true"></div>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
